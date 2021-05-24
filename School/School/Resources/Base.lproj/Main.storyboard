@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="GcE-4L-b9q">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Students-->
+        <scene sceneID="WKo-CX-0pV">
+            <objects>
+                <tableViewController id="wfp-6D-3OE" customClass="StudentListViewController" customModule="School" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="drx-wT-oqe">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="studentDetailCell" id="QPj-35-7Iq">
+                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QPj-35-7Iq" id="IAG-OT-PAI">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="wfp-6D-3OE" id="wuO-3U-Ptc"/>
+                            <outlet property="delegate" destination="wfp-6D-3OE" id="nls-bG-3Nw"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Students" id="qGb-ni-GGO">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="crB-1C-lfZ">
+                            <connections>
+                                <action selector="addStudent:" destination="wfp-6D-3OE" id="ZrZ-ZX-XeM"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="biK-wf-vbr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="938" y="50"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="46L-qv-QUC">
+            <objects>
+                <viewController id="75Z-Kh-rXE" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xaZ-wd-oJG">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Student Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DA9-ha-MVa">
+                                <rect key="frame" x="40" y="358" width="334" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Course Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vLo-ZC-QRI">
+                                <rect key="frame" x="40" y="431" width="334" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Cb-Fp-UNh">
+                                <rect key="frame" x="191" y="506" width="32" height="30"/>
+                                <state key="normal" title="Add "/>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="lAa-rV-Ekj"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="vLo-ZC-QRI" firstAttribute="trailing" secondItem="DA9-ha-MVa" secondAttribute="trailing" id="6WR-E2-tZ7"/>
+                            <constraint firstItem="vLo-ZC-QRI" firstAttribute="centerX" secondItem="xaZ-wd-oJG" secondAttribute="centerX" id="Hs3-OS-4QD"/>
+                            <constraint firstItem="lAa-rV-Ekj" firstAttribute="trailing" secondItem="vLo-ZC-QRI" secondAttribute="trailing" constant="40" id="Tlv-oV-MAn"/>
+                            <constraint firstItem="vLo-ZC-QRI" firstAttribute="leading" secondItem="lAa-rV-Ekj" secondAttribute="leading" constant="40" id="VAn-63-gA5"/>
+                            <constraint firstItem="8Cb-Fp-UNh" firstAttribute="top" secondItem="vLo-ZC-QRI" secondAttribute="bottom" constant="41" id="XNj-P1-Ue3"/>
+                            <constraint firstItem="vLo-ZC-QRI" firstAttribute="centerY" secondItem="xaZ-wd-oJG" secondAttribute="centerY" id="eYg-kL-qW0"/>
+                            <constraint firstItem="8Cb-Fp-UNh" firstAttribute="centerX" secondItem="vLo-ZC-QRI" secondAttribute="centerX" id="gMZ-yV-olA"/>
+                            <constraint firstItem="vLo-ZC-QRI" firstAttribute="top" secondItem="DA9-ha-MVa" secondAttribute="bottom" constant="39" id="ufO-rY-gdE"/>
+                            <constraint firstItem="vLo-ZC-QRI" firstAttribute="leading" secondItem="DA9-ha-MVa" secondAttribute="leading" id="ynd-IQ-cg0"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Oie-Vr-9Jh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1688.4057971014495" y="44.866071428571423"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="bYv-L0-c3I">
+            <objects>
+                <navigationController id="GcE-4L-b9q" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="zKo-Hy-9OL">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="wfp-6D-3OE" kind="relationship" relationship="rootViewController" id="gQa-NN-qWg"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kTc-pf-6Cg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="48" y="50"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
