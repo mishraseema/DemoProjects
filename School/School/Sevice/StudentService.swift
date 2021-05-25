@@ -9,7 +9,7 @@ import Foundation
 import CoreData
 
 enum CourseType:String {
-    case photography,painting,sketch
+    case photography,drawing
 }
 
 class StudentService {
@@ -18,6 +18,23 @@ class StudentService {
     
     init(moc:NSManagedObjectContext) {
         self.moc = moc
+    }
+    
+    //Mark: - Read Data
+    func getAllStudent() -> [Student]? {
+        //For sorted record
+        let sortByCourse = NSSortDescriptor(key: "course.name", ascending: true)
+        let sortByName = NSSortDescriptor(key: "name", ascending: true)
+        let req:NSFetchRequest<Student> = Student.fetchRequest()
+        req.sortDescriptors = [sortByCourse, sortByName]
+        do {
+            students = try moc.fetch(req)
+            return students
+        } catch let error as NSError {
+            print("Fetching Failed: \(error.localizedDescription)")
+                
+        }
+        return nil
     }
     
     // MARK: Add Student

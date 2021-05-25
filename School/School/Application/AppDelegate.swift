@@ -9,16 +9,10 @@ import UIKit
 import CoreData
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
-
-    var window: UIWindow?
-    
+class AppDelegate: UIResponder, UIApplicationDelegate {    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
-        let navVC = window?.rootViewController as? UINavigationController
-        let studVC = navVC?.viewControllers[0] as! StudentListViewController
-        studVC.moc = persistentContainer.viewContext
+      
         
         return true
     }

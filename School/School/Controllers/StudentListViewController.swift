@@ -22,7 +22,7 @@ class StudentListViewController: UITableViewController {
     private var students = [Student]()
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        loadRecords()
         self.tableView.tableFooterView = UIView(frame: CGRect.zero)
     }
 
@@ -43,6 +43,7 @@ class StudentListViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 
         cell.textLabel?.text = students[indexPath.row].name
+        cell.detailTextLabel?.text = students[indexPath.row].course?.name
 
         return cell
     }
@@ -76,7 +77,7 @@ class StudentListViewController: UITableViewController {
                     })
                 }
                 DispatchQueue.main.async {
-                    self?.tableView.reloadData()
+                    self?.loadRecords()
                 }
             }
             
@@ -90,5 +91,13 @@ class StudentListViewController: UITableViewController {
         alertController.addAction(cancelAction)
         return alertController
     }
+    
+    private func loadRecords(){
+        if let records = studentService?.getAllStudent(){
+            self.students = records
+            self.tableView.reloadData()
+        }
+    }
+    
     
 }
