@@ -9,12 +9,12 @@ import Foundation
 import CoreData
 
 enum CourseType:String {
-    case sandArt,Photography,painting,sketch
+    case photography,painting,sketch
 }
 
 class StudentService {
-    let moc:NSManagedObjectContext
-    var students = [Student]()
+    private let moc:NSManagedObjectContext
+    private var students = [Student]()
     
     init(moc:NSManagedObjectContext) {
         self.moc = moc
@@ -22,17 +22,18 @@ class StudentService {
     
     // MARK: Add Student
     func addStudent(name:String, for courseType:CourseType, completion:(Bool,[Student]) -> Void) {
+        
         let student = Student(context: moc)
         student.name = name
         
-        guard let course = courseExist(courseType) else {
-            completion(false,students)
-            return
+        if let course = courseExist(courseType)  {
+            register(student: student, course: course)
+            students.append(student)
+            completion(true,students)
         }
         
-        register(student: student, course: course)
-        students.append(student)
-        completion(true,students)
+        save()
+        
     }
     
     private func register(student:Student, course:Course) {
@@ -59,5 +60,13 @@ class StudentService {
         let course = Course(context: moc)
         course.name = courseType.rawValue
         return course
+    }
+    
+    private func save(){
+        do {
+            try moc.save()
+        } catch let error as NSError {
+            print("Save Faild: \(error.localizedDescription)")
+        }
     }
 }
