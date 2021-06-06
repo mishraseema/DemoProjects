@@ -20,6 +20,7 @@ class StudentListViewController: UITableViewController {
     
     private var studentService:StudentService?
     private var students = [Student]()
+    private var studentToUpdate:Student?
     override func viewDidLoad() {
         super.viewDidLoad()
         loadRecords()
@@ -47,6 +48,12 @@ class StudentListViewController: UITableViewController {
 
         return cell
     }
+    
+    //MARK: - TableView Delegate
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        studentToUpdate = students[indexPath.row]
+        present(alertController(actionType: "Update"), animated: true, completion: nil)
+    }
   
     @IBAction func addStudent(_ sender: Any) {
         present(alertController(actionType: "add"), animated: true, completion: nil)
@@ -56,11 +63,13 @@ class StudentListViewController: UITableViewController {
     
     private func alertController(actionType:String) -> UIAlertController {
         let alertController = UIAlertController(title: "Course", message: "Student Info", preferredStyle: .alert)
-        alertController.addTextField { (textField:UITextField) in
+        alertController.addTextField { [weak self] (textField:UITextField) in
             textField.placeholder = "Name"
+            textField.text = self?.studentToUpdate?.name ?? ""
         }
-        alertController.addTextField { (textField:UITextField) in
+        alertController.addTextField { [weak self] (textField:UITextField) in
             textField.placeholder = "Course Type: Photography | Drawing"
+            textField.text = self?.studentToUpdate?.course?.name ?? ""
         }
         let defaultAction = UIAlertAction( title: actionType.uppercased(), style: .default) { [weak self] (action) in
             
@@ -76,9 +85,15 @@ class StudentListViewController: UITableViewController {
                         }
                     })
                 }
-                DispatchQueue.main.async {
-                    self?.loadRecords()
-                }
+                
+            } else if actionType.caseInsensitiveCompare("update") == .orderedSame{
+                guard let name = alertController.textFields?.first?.text, !name.isEmpty, let studentToUpdate = self?.studentToUpdate, let courseT = alertController.textFields?[1].text else { return }
+                self?.studentService?.update(currentStudent:studentToUpdate, withName: name , forCourse: courseT)
+                self?.studentToUpdate = nil
+            }
+            
+            DispatchQueue.main.async {
+                self?.loadRecords()
             }
             
         }

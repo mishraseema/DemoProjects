@@ -86,4 +86,30 @@ class StudentService {
             print("Save Faild: \(error.localizedDescription)")
         }
     }
+    
+    //MARK:- Update Record
+    
+    func update(currentStudent student:Student, withName name:String, forCourse course:String) {
+        
+        // if student current course == new course
+        if student.course?.name?.caseInsensitiveCompare(course) == .orderedSame {
+            let course = student.course
+            let studList = Array(course?.students?.mutableCopy() as! NSMutableSet) as! [Student]
+            
+            if let index = studList.firstIndex(where:{ $0 == student}){
+                studList[index].name = name
+                course?.students = NSSet(array: studList)
+            }
+        }else{
+            
+            // If new course
+            if let course = courseExist(CourseType(rawValue: course)!){
+                course.removeFromStudents(student)
+                student.name = name
+                register(student: student, course: course)
+            }
+        }
+        
+        save()
+    }
 }
